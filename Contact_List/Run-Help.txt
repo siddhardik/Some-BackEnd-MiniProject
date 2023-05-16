@@ -1,0 +1,7 @@
+first Open Project Folder 
+then    ctrl + `       to open terminal on vs code 
+ 
+then write        npm install       to  install all desire module
+
+then write npm start
+

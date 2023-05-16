@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>
+            <%= locals.titleOfPage %>
+        </title>
+        <!-- <%= titleOfPage %>  This also works  -->
+    </head>
+
+    <body>
+        <p>Lets Play Some Fun!</p>
+         <ul>
+
+             <% for (let i of contact_list){ %>
+                   <li>
+                     <%= i.name %>
+                   </li>
+                   <p>
+                    <%= i.number %>
+                   </p>
+             <% } %>
+         </ul>
+    </body>
+</html>
