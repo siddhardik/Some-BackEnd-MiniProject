@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <title>
+        <%=title %>
+    </title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+    <div class="mainContainer">
+        <h3 id="appName">Welcome to TODO List</h3>
+        <form action="/create-Task" method="post">
+
+            <h5>Description</h5>
+            <input type="text" name="taskDescrip" id="taskDescrip" placeholder="What to do?">
+
+            <div class="category_Date_Container">
+
+                <div class="categoryContainer">
+                    <h5>Category</h5>
+                    <select name="taskCat" id="task">
+                        <option value="Work">Work</option>
+                        <option value="Study">Study</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="dateContainer">
+                    <h5>Date</h5>
+                    <input name="date" type="date" id="date">
+                </div>
+
+            </div>
+
+            <div class="buttonContainer">
+                <button id="add" type="submit"><i class="fa-sharp fa-solid fa-plus"></i>Add Task</button>
+            </div>
+
+        </form>
+
+        <ul>
+            <%
+                for(let i of taskList) {
+
+                    %>
+                        <li class="taskContainer">
+                            <div class="box_desc_Container">
+                                <div id="delete" onclick="location.href = '/handleCheck/?id=<%= i._id %>';"><i class="fa-solid fa-trash" style="color: #ff0000;"></i></div>
+                                <h6><%= i.desc %></h6>
+                            </div>
+                            <div class="category"><%= i.category %></div>
+                            <h6><%= i.date %></h6>
+                        </li>
+
+                    <%
+
+                }
+
+            %>
+
+        </ul>
+
+    </div>
+
+    
+
+    <script src="https://kit.fontawesome.com/610a540d5a.js" crossorigin="anonymous"></script>
+    <script src="/js/script.js"></script>
+    
+</body>
+
+</html>
