@@ -11,12 +11,13 @@ const MongoDB_Url="mongodb://127.0.0.1:27017/ContactArea";
 // //    if your database has auth enabled
 // }
 
-
+// //Connnection between mongoDb DataBase And Node js
 mongoose.connect(
   MongoDB_Url
 )
 .then(()=>console.log('connected'))
 .catch(e=>console.log(e));
+
 
 //acquire the connection
 const db = mongoose.connection;
