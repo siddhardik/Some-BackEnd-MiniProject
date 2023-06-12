@@ -1,10 +1,28 @@
 const User=require("../models/user");
 
+
 module.exports.profile= function(req, res) {
-    return res.render('user_profile', {
-        title:"user profile",
-    });
+    if(req.cookies.user_id){
+         User.findById(req.cookies.user_id).then(
+            (user)=>{
+                return res.render('user_profile',{
+                    title: "User profile",
+                    user:user
+                });
+            }
+         ).catch(
+            (err)=>{
+                return res.redirect("/users/sign-in");
+            }
+         );
+         
+    }
+
+    else{
+        return res.redirect("/users/sign-in");
+    }
 }
+
 
 // Render the sign Up page
 module.exports.signUp= function(req,res){
@@ -55,5 +73,38 @@ module.exports.create= function(req,res){
 }
 
 module.exports.createSession=function(req,res){
+  
+    // Steps To Authenticate 
+
+    // Find User 
+    User.findOne({email:req.body.email}).then((user)=>{
+        if(user){
+            //User Found
+
+            //Handle Password do not match
+            if(user.password !== req.body.password){
+                return res.redirect('back');
+            }
+
+            // Handle  Session Creation
+
+            res.cookie("user_id", user.id);
+            return res.redirect('/users/profile');
+               
+        }
+            else{
+                // USer Not Found 
+               return res.redirect('back');
+            }
+
+    }).catch(err=>{
+        if(err){
+
+            console.log("Error in finding user  to DB. Error");
+            return ;
+        }
+
+    });
+
 
 }
