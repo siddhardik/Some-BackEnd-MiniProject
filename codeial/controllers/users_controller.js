@@ -1,31 +1,22 @@
 const User=require("../models/user");
 
 
-module.exports.profile= function(req, res) {
-    if(req.cookies.user_id){
-         User.findById(req.cookies.user_id).then(
-            (user)=>{
-                return res.render('user_profile',{
-                    title: "User profile",
-                    user:user
-                });
-            }
-         ).catch(
-            (err)=>{
-                return res.redirect("/users/sign-in");
-            }
-         );
-         
-    }
-
-    else{
-        return res.redirect("/users/sign-in");
-    }
+module.exports.profile = function(req, res){
+    return res.render('user_profile', {
+        title: 'User Profile'
+    })
 }
 
 
 // Render the sign Up page
 module.exports.signUp= function(req,res){
+    
+    // When Alreday Authenticated
+    if(req.isAuthenticated()){
+        
+        return  res.redirect('/users/profile');
+    }
+
     return res.render('user_sign_up', {
         title:"Codeial | Sign Up",
     });
@@ -33,6 +24,12 @@ module.exports.signUp= function(req,res){
 
 // Render the sign In Page
 module.exports.signIn= function(req,res){
+  
+    // When Alreday Authenticated
+    if(req.isAuthenticated()){
+       
+        return res.redirect('/users/profile');
+   }
     return res.render('user_sign_in', {
         title:"Codeial | Sign In",
     });
@@ -72,39 +69,49 @@ module.exports.create= function(req,res){
 
 }
 
-module.exports.createSession=function(req,res){
+// module.exports.createSession=function(req,res){
   
-    // Steps To Authenticate 
+//     // Steps To Authenticate 
 
-    // Find User 
-    User.findOne({email:req.body.email}).then((user)=>{
-        if(user){
-            //User Found
+//     // Find User 
+//     User.findOne({email:req.body.email}).then((user)=>{
+//         if(user){
+//             //User Found
 
-            //Handle Password do not match
-            if(user.password !== req.body.password){
-                return res.redirect('back');
-            }
+//             //Handle Password do not match
+//             if(user.password !== req.body.password){
+//                 return res.redirect('back');
+//             }
 
-            // Handle  Session Creation
+//             // Handle  Session Creation
 
-            res.cookie("user_id", user.id);
-            return res.redirect('/users/profile');
+//             res.cookie("user_id", user.id);
+//             return res.redirect('/users/profile');
                
-        }
-            else{
-                // USer Not Found 
-               return res.redirect('back');
-            }
+//         }
+//             else{
+//                 // USer Not Found 
+//                return res.redirect('back');
+//             }
 
-    }).catch(err=>{
-        if(err){
+//     }).catch(err=>{
+//         if(err){
 
-            console.log("Error in finding user  to DB. Error");
-            return ;
-        }
+//             console.log("Error in finding user  to DB. Error");
+//             return ;
+//         }
 
-    });
+//     });
 
 
+// }
+
+
+// Sign in And Create A session for the user
+
+module.exports.createSession = function(req,res){
+
+    return res.redirect('/');
+
+    // Session is created in Passport.Js Itself 
 }

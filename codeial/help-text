@@ -1,0 +1,7 @@
+To Install Passport local
+
+mpm install passport-local
+
+Encrypted user_id cookies 
+
+<!-- With the help of express-session  user id encrypted and store int he cookie in browser   -->
