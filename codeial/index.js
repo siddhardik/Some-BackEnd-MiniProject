@@ -19,6 +19,8 @@ const passportLocal=require('./config/passport-local-strategy');
 
 app.use(expressLayouts);
 
+
+
 app.use(express.urlencoded());
 app.use(cookieParser());
 
