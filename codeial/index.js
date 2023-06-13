@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
-// import { default as connectMongoDBSession} from 'connect-mongodb-session';
 
-// const MongoDBStore = connectMongoDBSession(session);
+const sassMiddleware=require('node-sass-middleware');
+
+
+const MongoStore= require('connect-mongo');
+
 
 const db=require('./config/mongoose');
 
@@ -47,15 +50,16 @@ app.use(session(
     cookie: {
         maxAge: (1000*60*100)
     },
-    store: new MongoStore({
-        mongooseConnection: db,
+    store: MongoStore.create({
+        mongoUrl: 'mongodb://127.0.0.1:27017/codeial_development',
         autoRemove: 'disabled'
-    },
-    function(err){
-        console.log(err || 'Connect - MongoDB SetUp Ok! ');
+    }
+    ,function(err){
+        console.log(err||'connect-mongo-db');
     })
-}
-));
+    
+
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());

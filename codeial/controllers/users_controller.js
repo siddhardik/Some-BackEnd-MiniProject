@@ -115,3 +115,23 @@ module.exports.createSession = function(req,res){
 
     // Session is created in Passport.Js Itself 
 }
+
+
+// module.exports.destroySession=function(req, res, next) 
+// {
+//     req.logout(function(err) {
+//       if (err)  return next(err); 
+//       return res.redirect('/');
+//     });
+// }
+
+module.exports.destroySession=function(req, res,next) 
+{
+    req.logout(function(err) {
+      if (err)  return next(err); 
+      
+    });
+
+    return res.redirect('/');
+}
+
