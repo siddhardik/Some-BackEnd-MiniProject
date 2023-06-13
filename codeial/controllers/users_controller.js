@@ -45,7 +45,8 @@ module.exports.create= function(req,res){
     User.findOne({email:req.body.email}).then((user)=>{
         if(!user){
             User.create(req.body)
-             .then( (result) => {
+             .then( (newUser) => {
+                console.log("New User Is at DataBase " + newUser);
                  return res.redirect('/users/sign-in');
              })
              .catch( (err)=> {
