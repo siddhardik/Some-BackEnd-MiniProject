@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 
-const sassMiddleware=require('node-sass-middleware');
+// const sassMiddleware=require('node-sass-middleware');
 
 
 const MongoStore= require('connect-mongo');
