@@ -19,7 +19,7 @@ const userSchema= new mongoose.Schema({
     timestamps:true
 });
 
-const User=mongoose.model('userDetails',userSchema);
+const User=mongoose.model('User',userSchema);
 // Which i write model function first Argumnet it will be table / collection name ,
 //  Automatically LowerCAse And Pluaral
 

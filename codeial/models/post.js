@@ -7,7 +7,7 @@ const postSchema=new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         // ref:'User'
-        ref:'userDetails'
+        ref:'User'
     },
     comments:[{
         type:mongoose.Schema.Types.ObjectId,
@@ -17,6 +17,6 @@ const postSchema=new mongoose.Schema({
 },{
     timestamps:true
 });
-const Post=mongoose.model('postDetails',postSchema);
+const Post=mongoose.model('Post',postSchema);
 // postDetails AUTOMATICALLY will be on lower case and plural
 module.exports=Post;
