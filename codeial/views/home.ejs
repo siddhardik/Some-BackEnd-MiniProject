@@ -28,7 +28,7 @@
                      <% if(locals.user) {%>
                         <form action="/comments/create" method="post" required>
                             <input type="text" name="content" placeholder="Comment here">
-                            <input type="hidden" name="post" value="<%= post._id %>">
+                            <input type="hidden" name="post_id" value="<%= post._id %>">
                             <input type="submit" value="Add comment">
                         </form>
                           
